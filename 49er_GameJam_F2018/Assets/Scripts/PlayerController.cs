@@ -4,13 +4,17 @@ using UnityEngine;
 
 /*
 Author: Irvin Naylor
-Last Change: Dillon - Adding Acceleration
+Last Change: Dillon - Deceleration damage setup.
 Script summary
     - Script starts by using Player's Rigidbody component to continuously move forward
     - If the jump key is held down, the player jumps.
 list of fields
     - moveSpeed: movement speed forward
     - jumpForce: Upward jump force (how high can they jump?)
+    - maxSpeed: Speed Cap for player
+    - accel: a proportionate value for how quickly the player accelerates
+    - decelDam: the speed reduced when player gets hit
+
     - grounded: is the player on the ground?
     - whatIsGround: determines the layer the ground is on
 
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
     public float maxSpeed;
     public float accel;
+    public float decelDam;
 
 
     private Rigidbody2D RigidBody_A;
@@ -42,10 +47,12 @@ public class PlayerController : MonoBehaviour {
 
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         //returns true or false: is the player's collider touching another collider on the specified layer (aka the ground)?
 
@@ -55,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
         //is the character jumping?
 
-        if (Input.GetKeyDown(KeyCode.W) )
+        if (Input.GetKeyDown(KeyCode.W))
         {
 
             if (grounded) // is grounded true?
@@ -66,8 +73,19 @@ public class PlayerController : MonoBehaviour {
 
         //Accelerate velocity
         if (moveSpeed < maxSpeed)
+        {
             moveSpeed += accel;
+        }
         else
+        {
             moveSpeed = maxSpeed;
-	}
+
+        }
+    }
+
+    //speed Damage method
+    public void SlowDown()
+    {
+        moveSpeed -= decelDam;
+    }
 }
