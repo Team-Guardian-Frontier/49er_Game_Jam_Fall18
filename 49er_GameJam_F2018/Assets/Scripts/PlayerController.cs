@@ -14,6 +14,7 @@ list of fields
     - maxSpeed: Speed Cap for player
     - accel: a proportionate value for how quickly the player accelerates
     - decelDam: the speed reduced when player gets hit
+    -iTime: time the player is invincible
 
     - grounded: is the player on the ground?
     - whatIsGround: determines the layer the ground is on
@@ -35,6 +36,9 @@ public class PlayerController : MonoBehaviour {
     public float accel;
     public float decelDam;
 
+    public float iTime;
+
+    private bool invincible;
 
     private Rigidbody2D RigidBody_A;
     private Collider2D myCollider;
@@ -52,6 +56,8 @@ public class PlayerController : MonoBehaviour {
         accel = accel/100;
 
         inited = true;
+
+        invincible = false;
 
 	}
 
@@ -88,9 +94,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    //speed Damage method
+    //Damage called from other objects
     public void SlowDown()
     {
-        moveSpeed -= decelDam;
+        Debug.Log("I am " + invincible);
+
+        if (!invincible)
+        {
+            moveSpeed -= decelDam;
+            invincible = true;
+            Invoke("ResetInvulnerability", iTime);
+            
+        }
+
+    }
+
+    void ResetInvulnerability()
+    {
+        invincible = false;
     }
 }
