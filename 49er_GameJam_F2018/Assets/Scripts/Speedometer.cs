@@ -16,7 +16,7 @@ public class Speedometer : MonoBehaviour {
 
 	}
 	
-    
+    /*
 
 	// Update is called once per frame
 	void Update () {
@@ -24,4 +24,5 @@ public class Speedometer : MonoBehaviour {
         speedTxt.text = playerSpeed.velocity.x + "Mph";
 
 	}
+    */
 }

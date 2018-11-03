@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     public bool grounded;
     public LayerMask whatIsGround;
 
+    private float totalDamage;
 
 
 
@@ -104,10 +105,13 @@ public class PlayerController : MonoBehaviour {
 
         if (!invincible)
         {
-            moveSpeed -= decelDam;
+            totalDamage = decelDam * (moveSpeed / maxSpeed);
+            moveSpeed -= totalDamage;
             invincible = true;
             Invoke("ResetInvulnerability", iTime);
-            
+
+            Debug.Log("dam" + totalDamage);
+
         }
 
     }
