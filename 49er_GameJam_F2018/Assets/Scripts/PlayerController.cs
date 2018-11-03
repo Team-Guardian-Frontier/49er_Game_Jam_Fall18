@@ -11,6 +11,10 @@ Script summary
 list of fields
     - moveSpeed: movement speed forward
     - jumpForce: Upward jump force (how high can they jump?)
+    - grounded: is the player on the ground?
+    - whatIsGround: determines the layer the ground is on
+
+    - myCollider: gets the Collider2d component from the player
 (Any extra notes)
 */
 
@@ -21,21 +25,36 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce;
 
     private Rigidbody2D RigidBody_A;
+    private Collider2D myCollider;
 
-	// Use this for initialization
+    public bool grounded;
+    public LayerMask whatIsGround;
+
+
 	void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
+
+        myCollider = GetComponent<Collider2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        //returns true or false: is the player's collider touching another collider on the specified layer (aka the ground)?
+
+        grounded = Physics2D.IsTouchingLayers(myCollider, whatIsGround);
+
         RigidBody_A.velocity = new Vector2(moveSpeed, RigidBody_A.velocity.y);
 
         //is the character jumping?
 
         if (Input.GetKeyDown(KeyCode.W) )
         {
-            RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
+
+            if (grounded) // is grounded true?
+            {
+                RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
+            }
         }
 	}
 }

@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 618694770}
   - component: {fileID: 618694769}
   - component: {fileID: 618694771}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,6 +249,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
+  grounded: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &640392555
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +264,8 @@ GameObject:
   - component: {fileID: 640392558}
   - component: {fileID: 640392557}
   - component: {fileID: 640392556}
-  m_Layer: 0
-  m_Name: Cube
+  m_Layer: 8
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 1779870954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.03, y: 0, z: -10}
-  m_LocalScale: {x: 15, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
