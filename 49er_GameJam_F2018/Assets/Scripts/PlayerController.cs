@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
 Author: Irvin Naylor
-Last Change: Implemented auto movement and jumping
+Last Change: Dillon - Adding Acceleration
 Script summary
     - Script starts by using Player's Rigidbody component to continuously move forward
     - If the jump key is held down, the player jumps.
@@ -15,7 +15,7 @@ list of fields
     - whatIsGround: determines the layer the ground is on
 
     - myCollider: gets the Collider2d component from the player
-(Any extra notes)
+Notes:
 */
 
 
@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed;
     public float jumpForce;
+
+    public float maxSpeed;
+    public float accel;
+
 
     private Rigidbody2D RigidBody_A;
     private Collider2D myCollider;
@@ -35,6 +39,9 @@ public class PlayerController : MonoBehaviour {
         RigidBody_A = GetComponent<Rigidbody2D>();
 
         myCollider = GetComponent<Collider2D>();
+
+        //adjusts acceleration so it's a reasonable value to input.
+        accel = accel/100;
 	}
 	
 	// Update is called once per frame
@@ -56,5 +63,11 @@ public class PlayerController : MonoBehaviour {
                 RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
             }
         }
+
+        //Accelerate velocity
+        if (moveSpeed < maxSpeed)
+            moveSpeed += accel;
+        else
+            moveSpeed = maxSpeed;
 	}
 }
