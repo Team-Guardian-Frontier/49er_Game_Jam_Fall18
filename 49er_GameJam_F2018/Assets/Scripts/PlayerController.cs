@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour {
     public bool grounded;
     public LayerMask whatIsGround;
 
+    private float totalDamage;
+
+
 
 	void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
@@ -68,7 +71,8 @@ public class PlayerController : MonoBehaviour {
         inited = true;
 
         invincible = false;
-
+        
+        
 	}
 
     // Update is called once per frame
@@ -117,7 +121,7 @@ public class PlayerController : MonoBehaviour {
             moveSpeed = maxSpeed;
 
         }
-    }
+}
 
     //Damage called from other objects
     public void SlowDown()
@@ -126,10 +130,13 @@ public class PlayerController : MonoBehaviour {
 
         if (!invincible)
         {
-            moveSpeed -= decelDam;
+            totalDamage = decelDam * (moveSpeed / maxSpeed);
+            moveSpeed -= totalDamage;
             invincible = true;
             Invoke("ResetInvulnerability", iTime);
-            
+
+            Debug.Log("dam" + totalDamage);
+
         }
 
     }
