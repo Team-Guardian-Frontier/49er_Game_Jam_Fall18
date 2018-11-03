@@ -9,12 +9,13 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         time = 0;
+        timeText.text = "";
 	}
 	
 	// Update is called once per frame
 	void Update () {
         time += Time.deltaTime;
-        timeText.text = time.ToString();
-
-	}
+        Debug.Log(time);
+        timeText.text = Mathf.Round(time).ToString();
+    }
 }
