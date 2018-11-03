@@ -102,9 +102,10 @@ MonoBehaviour:
   inited: 0
   moveSpeed: 5
   jumpForce: 10
-  maxSpeed: 5
+  maxSpeed: 10
   accel: 0
-  decelDam: 0
+  decelDam: 1
+  iTime: 3
   grounded: 0
   whatIsGround:
     serializedVersion: 2
