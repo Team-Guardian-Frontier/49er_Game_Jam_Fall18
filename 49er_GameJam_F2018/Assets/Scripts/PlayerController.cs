@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
 
 
+
+
 	void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
 
@@ -58,7 +60,8 @@ public class PlayerController : MonoBehaviour {
         inited = true;
 
         invincible = false;
-
+        
+        
 	}
 
     // Update is called once per frame
@@ -92,7 +95,7 @@ public class PlayerController : MonoBehaviour {
             moveSpeed = maxSpeed;
 
         }
-    }
+}
 
     //Damage called from other objects
     public void SlowDown()
