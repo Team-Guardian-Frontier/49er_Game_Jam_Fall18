@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
 Author: Irvin Naylor
-Last Change: Dillon - Deceleration damage setup.
+Last Change: Michael - Adding Ducking
 Script summary
     - Script starts by using Player's Rigidbody component to continuously move forward
     - If the jump key is held down, the player jumps.
@@ -36,12 +36,18 @@ public class PlayerController : MonoBehaviour {
     public float accel;
     public float decelDam;
 
+
     public float iTime;
 
     private bool invincible;
 
+    public Sprite Stand;
+    public Sprite Duck;
+
     private Rigidbody2D RigidBody_A;
     private Collider2D myCollider;
+    private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -51,6 +57,10 @@ public class PlayerController : MonoBehaviour {
         RigidBody_A = GetComponent<Rigidbody2D>();
 
         myCollider = GetComponent<Collider2D>();
+
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
@@ -80,6 +90,21 @@ public class PlayerController : MonoBehaviour {
             {
                 RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S) && grounded) 
+        {
+            spriteRenderer.sprite = Duck;
+            boxCollider.size = new Vector2(1, (float).5);
+            boxCollider.offset = new Vector2(0, (float)-.25);
+
+        } 
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            spriteRenderer.sprite = Stand;
+            boxCollider.size = new Vector2(1, 1);
+            boxCollider.offset = new Vector2(0, 0);
+
         }
 
         //Accelerate velocity
