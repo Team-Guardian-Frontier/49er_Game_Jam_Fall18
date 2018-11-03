@@ -75,10 +75,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.014392599, y: 0.3402418}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0.15625, y: 0.15625, z: 0.1875, w: 0.15625}
-    pivot: {x: 0.48560742, y: 0.15975823}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -104,6 +104,8 @@ MonoBehaviour:
   maxSpeed: 0
   accel: 0
   decelDam: 5
+  Stand: {fileID: 21300000, guid: b621968e68e16894e935f71cb706198a, type: 3}
+  Duck: {fileID: 21300000, guid: 60d32fea44d1340fe884a1e640455ff3, type: 3}
   grounded: 0
   whatIsGround:
     serializedVersion: 2
