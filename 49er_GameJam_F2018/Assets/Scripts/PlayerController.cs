@@ -25,6 +25,9 @@ Notes:
 
 public class PlayerController : MonoBehaviour {
 
+    //TEST VALUE
+    public bool inited = false;
+
     public float moveSpeed;
     public float jumpForce;
 
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour {
 
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
+
+        inited = true;
 
 	}
 

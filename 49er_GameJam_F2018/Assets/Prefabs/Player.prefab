@@ -99,11 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a10f1473a129b4fbeab0e37b8cd59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inited: 0
   moveSpeed: 0
   jumpForce: 10
   maxSpeed: 0
   accel: 0
-  decelDam: 5
+  decelDam: 0
   grounded: 0
   whatIsGround:
     serializedVersion: 2
