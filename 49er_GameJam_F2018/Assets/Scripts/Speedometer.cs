@@ -9,15 +9,16 @@ public class Speedometer : MonoBehaviour {
     public Text speedTxt;
     private GameObject player;
     private Rigidbody2D playerSpeed;
+    private ToggleUI toggy;
     public float x;
     public float xPos = 0;
     public float yPos = -55;
 
     // USE AWAKE. The text elements will be null exceptions if you use start.
-    void Awake () {
+    void Start () {
 
         //find objects
-        ObjLoader();
+        ObjFinder();
 
         
        
@@ -53,11 +54,13 @@ public class Speedometer : MonoBehaviour {
                                                         Camera.main.WorldToScreenPoint(controller.transform.position).z);
             speedTxt.text = Mathf.Round(playerSpeed.velocity.x) + " MPH";
         }
-        
+        else
+            ObjFinder();
+
         x = playerSpeed.velocity.x;
     }
 
-    void ObjLoader()
+    void ObjFinder()
     {
         //automatically find objects
         if (player == null)
@@ -67,7 +70,10 @@ public class Speedometer : MonoBehaviour {
         if (controller == null)
             controller = player.GetComponent<PlayerController>();
         if (speedTxt == null)
-            speedTxt = GameObject.Find("Speedometer").GetComponent<Text>();
+        {
+            toggy = this.GetComponent<ToggleUI>();
+            speedTxt = toggy.getTextObject("speed").GetComponent<Text>();
+        }
     }
 
 }
