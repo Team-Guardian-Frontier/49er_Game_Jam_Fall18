@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
 Author: Irvin Naylor
-Last Change: Michael - Adding Ducking
+Last Change: Michael - Added Flashing
 Script summary
     - Script starts by using Player's Rigidbody component to continuously move forward
     - If the jump key is held down, the player jumps.
@@ -26,7 +26,8 @@ Notes:
 
 public class PlayerController : MonoBehaviour {
 
-
+    public Color flash;
+    private Color mainColor = new Color(255,255,255);
 
     public float moveSpeed;
     public float jumpForce;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     public float decelDam;
 
 
-    public float iTime;
+    public float iTime = 3;
 
     private bool invincible;
     private bool Dyin;
@@ -55,7 +56,8 @@ public class PlayerController : MonoBehaviour {
 
     private float totalDamage;
 
-
+    private int flashC;
+    public int flashAmount = 10;
 
 	void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
@@ -66,10 +68,12 @@ public class PlayerController : MonoBehaviour {
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        spriteRenderer.color = mainColor;
+
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
 
-
+        
         invincible = false;
 
         Dyin = false;
@@ -163,7 +167,7 @@ public class PlayerController : MonoBehaviour {
                 moveSpeed += accel;
             }
         }
-        
+
     }
 
     //Damage called from other objects
@@ -200,5 +204,25 @@ public class PlayerController : MonoBehaviour {
         managerial.GameOver();
 
 
+    }
+
+    private void LateUpdate()
+    {
+        //makes object flash when invincible
+        if (invincible)
+        {
+            if (flashC < flashAmount) {
+                spriteRenderer.color = flash;
+
+            } else {
+                spriteRenderer.color = mainColor;
+            }
+
+            if (flashC > flashAmount * 2) flashC = 0;
+            flashC++;
+        } else {
+            spriteRenderer.color = mainColor;
+        }
+       
     }
 }
