@@ -17,6 +17,11 @@ public class Timer : MonoBehaviour {
     // Use this for initialization
     void Start () {
         time = 0;
+        if (timeText == null)
+        {
+            timeText = GameObject.Find("Timer").GetComponent<Text>();
+        }
+        
         timeText.text = "";
 
         timeText.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x + xPos, Camera.main.WorldToScreenPoint(controller.transform.position).y + yPos, Camera.main.WorldToScreenPoint(controller.transform.position).z);

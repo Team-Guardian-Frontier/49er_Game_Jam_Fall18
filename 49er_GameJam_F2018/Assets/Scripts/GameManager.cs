@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
 
     }
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour {
             //restart if player deleted.
             if (Player == null)
             {
+                GetComponent<Timer>().time = 0;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour {
             //restart if player slowed to halt
             if (controller.moveSpeed <= 0)
             {
+                GetComponent<Timer>().time = 0;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             
@@ -68,6 +70,7 @@ public class GameManager : MonoBehaviour {
         //Quick restart for Debug, R
         if (Input.GetKeyDown(KeyCode.R))
         {
+            GetComponent<Timer>().time = 0;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
