@@ -5,11 +5,14 @@ using UnityEngine;
 public class ToggleUI : MonoBehaviour {
     public GameObject menu;
     public bool isShowing;
+
     public GameObject menu2;
     public bool isShowing2;
+
     // Use this for initialization
     void Start () {
         isShowing = true;
+        isShowing2 = true;
 	}
 	
 	// Update is called once per frame
@@ -22,8 +25,10 @@ public class ToggleUI : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            isShowing2 = !isShowing2;
-            menu2.SetActive(isShowing2);
+
+                isShowing2 = !isShowing2;
+                menu2.SetActive(isShowing2);
+
         }
     }
 }
