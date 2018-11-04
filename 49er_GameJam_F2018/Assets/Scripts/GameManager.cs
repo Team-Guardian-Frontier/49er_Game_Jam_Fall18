@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviour {
     private GameObject Player;
     private PlayerController controller;
     public Text GMText;
-    public GameObject Meame;
+
+    private Timer timer;
 
 
     void Awake()
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour {
         }
         GMText.text = "";
 
+
+        timer = this.GetComponent<Timer>();
         //DontDestroyOnLoad(gameObject);
         /* Can't do above, because we need the awake and start functions on scripts on this object.
         If we had it, this would never reload, and they would point to the same references throughout entire game
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour {
             //restart if player deleted.
             if (Player == null)
             {
-                GameOver();
+                GameOver(-1);
             }
         }
         else //all player functions if the player isn't null.
@@ -83,13 +86,14 @@ public class GameManager : MonoBehaviour {
         //Quick restart for Debug, R
         if (Input.GetKeyDown(KeyCode.R))
         {
-            GameOver();
+            GameOver(-1);
         }
 
     }
 
-    public void GameOver()
+    public void GameOver(int goo)
     {
+        //goo < 0 game over, anything else is win.
         GetComponent<Timer>().time = 0;
 
         if (GMText == null)
@@ -99,10 +103,21 @@ public class GameManager : MonoBehaviour {
         
         if (GMText != null)
         {
-            GMText.text = "Game Over!";
+            if (goo <= 0)
+            {
+                GMText.text = "Game Over!";
+                Invoke("Restart", 3);
+            }
+            else 
+            {
+                //placeholder.
+                GMText.text = "You win! Your Time is " + timer.time;
+                //HS?
+                Invoke("Restart", 5);
+            }
         }
 
-        Invoke("Restart", 3);
+        
         
 
     }
