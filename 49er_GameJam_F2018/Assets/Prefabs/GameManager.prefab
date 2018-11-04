@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114114183450923280}
   - component: {fileID: 114979922027299498}
   - component: {fileID: 114513367682946214}
+  - component: {fileID: 114729451465153752}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -67,6 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   timeText: {fileID: 0}
+  controller: {fileID: 0}
+  xPos: 0
+  yPos: 55
 --- !u!114 &114513367682946214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,10 +82,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd7ff7d54015a94abe37f625b508dc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  isShowing: 0
-  menu2: {fileID: 0}
-  isShowing2: 0
+  speed: {fileID: 0}
+  timer: {fileID: 0}
+  timeUp: 100
+  pauseDelay: 85
+--- !u!114 &114729451465153752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1395904539829458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fb1df1b714b154198ae530478432a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalVisLevel: 0
 --- !u!114 &114979922027299498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,5 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b872fca58bd6ec043bfcdd8e42686735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  controller: {fileID: 0}
   speedTxt: {fileID: 0}
+  x: 0
+  xPos: 0
+  yPos: -55

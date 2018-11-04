@@ -1150,7 +1150,17 @@ Prefab:
     - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
         type: 2}
       propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
+        type: 2}
+      propertyPath: minSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
+        type: 2}
+      propertyPath: decelDam
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c1f0a1faf4174429634b8878639783, type: 2}
