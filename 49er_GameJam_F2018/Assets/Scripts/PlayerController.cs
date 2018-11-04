@@ -61,7 +61,9 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
 
     private float totalDamage;
-    
+
+    private float Boxheight;
+
     public float jumpTime;
     public float jumpTimeCounter;
     public bool stoppedJumping;
@@ -93,8 +95,11 @@ public class PlayerController : MonoBehaviour {
 
         Dyin = false;
         Winnin = false;
-        
-	}
+
+        Boxheight = 1.330018f;
+
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -150,7 +155,7 @@ public class PlayerController : MonoBehaviour {
 
 
  
-        if (Input.GetKeyDown(KeyCode.S) || (Input.GetKeyDown(KeyCode.DownArrow) && grounded))
+        if (Input.GetKey(KeyCode.S) || (Input.GetKey(KeyCode.DownArrow) && grounded))
         {
             if (Time.timeScale == 0)
             {
@@ -160,7 +165,7 @@ public class PlayerController : MonoBehaviour {
             else
             {
                 spriteRenderer.sprite = Duck;
-                boxCollider.size = new Vector2(0.7036116f, 0.665009f);
+                boxCollider.size = new Vector2(0.7036116f, Boxheight/2);
                 boxCollider.offset = new Vector2(0, -.1f);
             }
 
@@ -171,7 +176,7 @@ public class PlayerController : MonoBehaviour {
             {
 
             }
-
+            
             else
             {
                 spriteRenderer.sprite = Stand;

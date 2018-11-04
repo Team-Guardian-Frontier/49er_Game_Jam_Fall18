@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     private GameObject Player;
     private PlayerController controller;
     public Text GMText;
-
+    private float lastTime;
     private Timer timer;
 
 
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour {
     public void GameOver(int goo)
     {
         //goo < 0 game over, anything else is win.
-        GetComponent<Timer>().time = 0;
+        Invoke("timeSet", (1 / 60));
 
         if (GMText == null)
         {
@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
             else 
             {
                 //placeholder.
-                GMText.text = "You win! Your Time is " + timer.time;
+                GMText.text = "You win! Your Time is " + lastTime;
                 //HS?
                 Invoke("Restart", 5);
             }
@@ -120,6 +120,11 @@ public class GameManager : MonoBehaviour {
         
         
 
+    }
+
+    void timeSet()
+    {
+        lastTime = timer.time;
     }
 
     void Restart()
