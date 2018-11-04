@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
 
     }
@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour {
 
     public void GameOver()
     {
+        GetComponent<Timer>().time = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 }
