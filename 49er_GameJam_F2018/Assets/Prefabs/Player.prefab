@@ -100,11 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flash: {r: 0, g: 0, b: 0, a: 0}
-<<<<<<< HEAD
-  moveSpeed: 3
-=======
   moveSpeed: 5
->>>>>>> 63f604b172bbe1e365c7c2cc81440c7f1790da86
   jumpForce: 10
   maxSpeed: 20
   minSpeed: 0
@@ -117,12 +113,8 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-<<<<<<< HEAD
-  jumpTime: 0.3
-=======
   flashAmount: 10
   jumpTime: 1
->>>>>>> 63f604b172bbe1e365c7c2cc81440c7f1790da86
   jumpTimeCounter: 0
   stoppedJumping: 0
   flashAmount: 10
