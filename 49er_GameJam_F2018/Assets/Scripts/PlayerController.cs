@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour {
     private bool invincible;
     private bool Dyin;
 
+    //winning
+    private bool Winnin;
+    private GameManager Manager;
+
     public Sprite Stand;
     public Sprite Duck;
 
@@ -88,12 +92,15 @@ public class PlayerController : MonoBehaviour {
        
 
         Dyin = false;
+        Winnin = false;
         
 	}
 
     // Update is called once per frame
     void Update()
     {
+        //Find GameManager
+        ManagerFinder();
 
         //returns true or false: is the player's collider touching another collider on the specified layer (aka the ground)?
 
@@ -158,20 +165,24 @@ public class PlayerController : MonoBehaviour {
             moveSpeed = maxSpeed;
  
         }
-        else if (moveSpeed <= minSpeed)
+        else if (moveSpeed <= minSpeed || Winnin)
         {
             //so it doesn't bounce. but delete doesn't release.
             if (moveSpeed < 0)
                 moveSpeed = minSpeed;
 
-            Debug.Log("Dying");
+
 
 
             //auto destroys anything under 1.
             if (moveSpeed < .5)
             {
                 Dyin = false;
-                Invoke("Destruction", 2);
+                if (!Winnin)
+                    Invoke("Destruction", 2);
+                else
+                    Manager.GameOver(1);
+                    
             }
             else
             {
@@ -226,6 +237,12 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    //Win called from elsewhere
+    public void WinnerDinner()
+    {
+        Winnin = true;
+    }
+
     void ResetInvulnerability()
     {
         invincible = false;
@@ -237,12 +254,17 @@ public class PlayerController : MonoBehaviour {
         Dyin = false;
         moveSpeed = 0;
 
-        GameObject Manager = GameObject.Find("GameManager");
-        GameManager managerial = Manager.GetComponent<GameManager>();
-        managerial.GameOver();
+        Manager.GameOver(-1);
 
 
     }
+
+    void ManagerFinder()
+    {
+        if (Manager == null)
+            Manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
+
 
     private void LateUpdate()
     {
