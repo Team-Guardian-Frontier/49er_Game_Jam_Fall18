@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 
 /*
 Author: Dillon Zhong
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour {
     private static GameManager instance = null;
     private GameObject Player;
     private PlayerController controller;
+    public Text GMText;
+    public GameObject Meame;
 
 
     void Awake()
@@ -31,6 +35,12 @@ public class GameManager : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+
+        if (GMText == null)
+        {
+            GMText = GameObject.Find("GameOver").GetComponent<Text>();
+        }
+        GMText.text = "";
 
         //DontDestroyOnLoad(gameObject);
         /* Can't do above, because we need the awake and start functions on scripts on this object.
@@ -43,6 +53,14 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (GMText == null)
+        {
+            GMText = GameObject.Find("GameOver").GetComponent<Text>();
+        }
+
+
+
 
         //Find player, get controller.
         if (Player == null)
@@ -73,7 +91,25 @@ public class GameManager : MonoBehaviour {
     public void GameOver()
     {
         GetComponent<Timer>().time = 0;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        if (GMText == null)
+        {
+            GMText = GameObject.Find("GameOver").GetComponent<Text>();
+        }
+        
+        if (GMText != null)
+        {
+            GMText.text = "Game Over!";
+        }
+
+        Invoke("Restart", 3);
+        
 
     }
+
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }

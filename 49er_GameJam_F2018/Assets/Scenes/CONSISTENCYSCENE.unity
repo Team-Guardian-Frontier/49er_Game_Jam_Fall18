@@ -197,12 +197,12 @@ Prefab:
     - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
         type: 2}
       propertyPath: moveSpeed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
         type: 2}
       propertyPath: accel
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
         type: 2}
@@ -213,6 +213,16 @@ Prefab:
         type: 2}
       propertyPath: jumpForce
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
+        type: 2}
+      propertyPath: jumpTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935403640943312, guid: 60c1f0a1faf4174429634b8878639783,
+        type: 2}
+      propertyPath: minSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60c1f0a1faf4174429634b8878639783, type: 2}
@@ -477,6 +487,11 @@ Prefab:
       propertyPath: timeUp
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 114114183450923280, guid: bd3c79c72b2e81a45af9188f168a90a3,
+        type: 2}
+      propertyPath: Meame
+      value: 
+      objectReference: {fileID: 1377944144}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd3c79c72b2e81a45af9188f168a90a3, type: 2}
   m_IsPrefabAsset: 0
@@ -630,6 +645,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5632e9f6f773e6041b996453a2e45df3, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1377944144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1514074396851986, guid: 0e88c417305305a4f9cbc09e87cf6903,
+    type: 2}
+  m_PrefabInternal: {fileID: 580781350}
 --- !u!1001 &1910620807
 Prefab:
   m_ObjectHideFlags: 0

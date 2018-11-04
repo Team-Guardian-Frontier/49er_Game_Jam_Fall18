@@ -226,7 +226,6 @@ public class PlayerController : MonoBehaviour {
 
     void Destruction()
     {
-        Debug.Log("You are now Dead");
         Dyin = false;
         moveSpeed = 0;
 

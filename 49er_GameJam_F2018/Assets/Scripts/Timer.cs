@@ -57,6 +57,7 @@ public class Timer : MonoBehaviour {
             player = GameObject.Find("Player");
         if (controller == null)
             controller = player.GetComponent<PlayerController>();
+
         if (timeText == null)
         {
             toggy = this.GetComponent<ToggleUI>();
