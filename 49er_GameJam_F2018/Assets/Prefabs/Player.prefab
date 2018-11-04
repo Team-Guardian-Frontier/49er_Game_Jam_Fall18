@@ -103,6 +103,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   maxSpeed: 20
+  minSpeed: 0
   accel: 5
   decelDam: 2
   iTime: 1
@@ -116,6 +117,7 @@ MonoBehaviour:
   jumpTime: 1
   jumpTimeCounter: 0
   stoppedJumping: 0
+  flashAmount: 10
 --- !u!212 &212867699537042106
 SpriteRenderer:
   m_ObjectHideFlags: 1
