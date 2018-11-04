@@ -7,8 +7,11 @@ public class ToggleUI : MonoBehaviour {
     public GameObject timer;
     public int timeUp;
 
+    public int pauseDelay = 85;
+
     private int speedC = 0;
     private int timerC = 0;
+    private int pauseC = 1000;
 
     // Use this for initialization
     void Start () {
@@ -31,11 +34,13 @@ public class ToggleUI : MonoBehaviour {
                 Time.timeScale = 0;
             }
 
-            else if (Time.timeScale == 0)
+            else //if (Time.timeScale == 0)
             {
-                Time.timeScale = 1;
+                pauseC = 0;
             }
         }
+
+        if (pauseC == pauseDelay) Time.timeScale = 1;
 
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -65,7 +70,12 @@ public class ToggleUI : MonoBehaviour {
 
         }
 
+        pauseC++;
         timerC++;
         speedC++;
+    }
+
+    void StartTime() {
+        Time.timeScale = 1;
     }
 }
