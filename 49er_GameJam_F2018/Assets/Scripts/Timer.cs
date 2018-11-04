@@ -19,12 +19,8 @@ public class Timer : MonoBehaviour {
     void Awake () {
         time = 0;
 
-        if (player == null)
-            player = GameObject.Find("Player");
-        if (controller == null)
-            controller = player.GetComponent<PlayerController>();
-        if (timeText == null)
-            timeText = GameObject.Find("Timer").GetComponent<Text>();
+        ObjFinder();
+       
         
         timeText.text = "";
 
@@ -48,5 +44,15 @@ public class Timer : MonoBehaviour {
                                                     Camera.main.WorldToScreenPoint(controller.transform.position).y + yPos, 
                                                     Camera.main.WorldToScreenPoint(controller.transform.position).z);
 
+    }
+
+    void ObjFinder()
+    {
+        if (player == null)
+            player = GameObject.Find("Player");
+        if (controller == null)
+            controller = player.GetComponent<PlayerController>();
+        if (timeText == null)
+            timeText = GameObject.Find("Timer").GetComponent<Text>();
     }
 }

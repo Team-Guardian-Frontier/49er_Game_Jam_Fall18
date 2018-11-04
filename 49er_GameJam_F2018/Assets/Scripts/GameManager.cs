@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         //DontDestroyOnLoad(gameObject);
-
+        /* Can't do above, because we need the awake and start functions on scripts on this object.
+        If we had it, this would never reload, and they would point to the same references throughout entire game
+        We need to separate between game manager and something like a scene manager to attatch things that reset in a scene.
+        */
 
     }
 

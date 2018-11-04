@@ -16,11 +16,7 @@ public class ToggleUI : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        //find by name
-        if (speed == null)
-            speed = GameObject.Find("Speedometer");
-        if (timer == null)
-            timer = GameObject.Find("Timer");
+        ObjLoader();
 
         timer.SetActive(false);
         speed.SetActive(false);
@@ -83,5 +79,15 @@ public class ToggleUI : MonoBehaviour {
 
     void StartTime() {
         Time.timeScale = 1;
+    }
+
+    void ObjLoader()
+    {
+
+        //find by name
+        if (speed == null)
+            speed = GameObject.Find("Speedometer");
+        if (timer == null)
+            timer = GameObject.Find("Timer");
     }
 }

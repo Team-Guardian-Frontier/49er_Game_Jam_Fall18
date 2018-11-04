@@ -16,18 +16,10 @@ public class Speedometer : MonoBehaviour {
     // USE AWAKE. The text elements will be null exceptions if you use start.
     void Awake () {
 
+        //find objects
+        ObjLoader();
 
-
-
-        //automatically find objects
-        if (player == null)
-            player = GameObject.Find("Player");
-        if (playerSpeed == null)
-            playerSpeed = player.GetComponent<Rigidbody2D>();
-        if (controller == null)
-            controller = player.GetComponent<PlayerController>();
-        if (speedTxt == null)
-            speedTxt = GameObject.Find("Speedometer").GetComponent<Text>();
+        
        
             //Add code here to break something if these are null.
 
@@ -63,6 +55,19 @@ public class Speedometer : MonoBehaviour {
         }
         
         x = playerSpeed.velocity.x;
+    }
+
+    void ObjLoader()
+    {
+        //automatically find objects
+        if (player == null)
+            player = GameObject.Find("Player");
+        if (playerSpeed == null)
+            playerSpeed = player.GetComponent<Rigidbody2D>();
+        if (controller == null)
+            controller = player.GetComponent<PlayerController>();
+        if (speedTxt == null)
+            speedTxt = GameObject.Find("Speedometer").GetComponent<Text>();
     }
 
 }
