@@ -89,12 +89,18 @@ public class PlayerController : MonoBehaviour {
         //Accelerate velocity
         if (moveSpeed < maxSpeed)
         {
-            moveSpeed += accel;
+            if (Time.timeScale == 0)
+            {
+                moveSpeed = moveSpeed;
+            }
+            else
+            {
+                moveSpeed += accel;
+            }
         }
         else
         {
             moveSpeed = maxSpeed;
-
         }
 }
 
