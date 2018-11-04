@@ -20,6 +20,7 @@ list of fields
     - whatIsGround: determines the layer the ground is on
 
     - myCollider: gets the Collider2d component from the player
+    - myAnimator: gets the animator component for the player
 Notes:
 */
 
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour {
     private Collider2D myCollider;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
+    private Animator myAnimator;
 
     public bool grounded;
     public LayerMask whatIsGround;
@@ -77,6 +79,8 @@ public class PlayerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.color = mainColor;
+
+        myAnimator = GetComponent<Animator>();
 
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
@@ -142,14 +146,14 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.S) || (Input.GetKeyDown(KeyCode.DownArrow) && grounded))
         {
             spriteRenderer.sprite = Duck;
-            boxCollider.size = new Vector2(1, (float).5);
-            boxCollider.offset = new Vector2(0, (float)-.25);
+            boxCollider.size = new Vector2(0.7036116f, 0.665009f);
+            boxCollider.offset = new Vector2(0,-.1f);
 
         } 
-        else if (Input.GetKeyUp(KeyCode.S) || (Input.GetKeyUp(KeyCode.DownArrow)))
+        else
         {
             spriteRenderer.sprite = Stand;
-            boxCollider.size = new Vector2(1, 1);
+            boxCollider.size = new Vector2(0.7036116f, 1.330018f);
             boxCollider.offset = new Vector2(0, 0);
 
         }
@@ -209,6 +213,10 @@ public class PlayerController : MonoBehaviour {
                 moveSpeed += accel;
             }
         }
+
+        myAnimator.SetFloat("Speed", RigidBody_A.velocity.x);
+        myAnimator.SetBool("Grounded", grounded);
+
 
     }
 
