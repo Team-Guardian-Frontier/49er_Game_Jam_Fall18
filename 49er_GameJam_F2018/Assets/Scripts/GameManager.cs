@@ -28,9 +28,12 @@ public class GameManager : MonoBehaviour {
     private float lastTime;
     private Timer timer;
 
+    private bool timeset;
+
 
     void Awake()
     {
+
         //Prevent Duplicates
         if (instance == null)
             instance = this;
@@ -50,6 +53,8 @@ public class GameManager : MonoBehaviour {
         If we had it, this would never reload, and they would point to the same references throughout entire game
         We need to separate between game manager and something like a scene manager to attatch things that reset in a scene.
         */
+
+        timeset = false;
 
     }
 
@@ -94,7 +99,12 @@ public class GameManager : MonoBehaviour {
     public void GameOver(int goo)
     {
         //goo < 0 game over, anything else is win.
-        Invoke("timeSet", (1 / 60));
+
+        if (!timeset)
+        {
+            lastTime = timer.time;
+            timeset = true;
+        }
 
         if (GMText == null)
         {
@@ -122,10 +132,6 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    void timeSet()
-    {
-        lastTime = timer.time;
-    }
 
     void Restart()
     {
