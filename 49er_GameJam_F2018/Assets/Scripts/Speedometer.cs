@@ -26,8 +26,8 @@ public class Speedometer : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        speedTxt.text = Mathf.Round(playerSpeed.velocity.x) + "Mph";
-        x = playerSpeed.velocity.x;
+        //speedTxt.text = Mathf.Round(playerSpeed.velocity.x) + "Mph";
+        //x = playerSpeed.velocity.x;
 
 
     }
@@ -36,6 +36,8 @@ public class Speedometer : MonoBehaviour {
     {
         speedTxt.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x + xPos, Camera.main.WorldToScreenPoint(controller.transform.position).y + yPos, Camera.main.WorldToScreenPoint(controller.transform.position).z);
 
+        speedTxt.text = Mathf.Round(playerSpeed.velocity.x) + "Mph";
+        x = playerSpeed.velocity.x;
     }
 
 }
