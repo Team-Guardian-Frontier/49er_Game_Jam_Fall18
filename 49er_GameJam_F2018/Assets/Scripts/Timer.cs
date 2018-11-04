@@ -9,6 +9,11 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         time = 0;
+        if (timeText == null)
+        {
+            timeText = GameObject.Find("Timer").GetComponent<Text>();
+        }
+        
         timeText.text = "";
 	}
 	

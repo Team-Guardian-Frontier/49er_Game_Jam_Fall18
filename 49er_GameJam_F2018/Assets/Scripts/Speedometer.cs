@@ -11,7 +11,7 @@ public class Speedometer : MonoBehaviour {
 	void Start () {
 
         speed = 0;
-        speedTxt.text = " Mph";
+        //speedTxt.text = " Mph";
         playerSpeed = GameObject.Find("Player").GetComponent<Rigidbody2D>();
 
 	}

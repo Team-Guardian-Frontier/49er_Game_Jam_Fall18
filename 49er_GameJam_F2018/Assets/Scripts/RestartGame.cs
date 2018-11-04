@@ -24,6 +24,7 @@ public class RestartGame : MonoBehaviour {
         //checks if what entered trigger
         if (other.gameObject.CompareTag("Player"))
         {
+            GameObject.Find("GameManager").GetComponent<Timer>().time = 0;
             controller = other.gameObject.GetComponent<PlayerController>();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
