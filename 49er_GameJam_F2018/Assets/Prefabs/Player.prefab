@@ -99,10 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a10f1473a129b4fbeab0e37b8cd59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inited: 0
+  flash: {r: 0, g: 0, b: 0, a: 0}
   moveSpeed: 3
   jumpForce: 10
   maxSpeed: 20
+  minSpeed: 0
   accel: 5
   decelDam: 2
   iTime: 1
@@ -112,9 +113,10 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  jumpTime: 1
+  jumpTime: 0.3
   jumpTimeCounter: 0
   stoppedJumping: 0
+  flashAmount: 10
 --- !u!212 &212867699537042106
 SpriteRenderer:
   m_ObjectHideFlags: 1
