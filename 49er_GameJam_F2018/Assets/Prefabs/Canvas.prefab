@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 223906154739201820}
   - component: {fileID: 114743753203012832}
   - component: {fileID: 114025792004518468}
+  - component: {fileID: 114313985802666176}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -39,7 +40,6 @@ GameObject:
   - component: {fileID: 224731112616262114}
   - component: {fileID: 222752151190748522}
   - component: {fileID: 114786083401456856}
-  - component: {fileID: 114763709749823534}
   m_Layer: 5
   m_Name: Speedometer
   m_TagString: Untagged
@@ -63,6 +63,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114313985802666176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1151413373749798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b675844e070545d47bbb4c8b1ccd9614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
 --- !u!114 &114743753203012832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -84,18 +96,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114763709749823534
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1633947149157128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beaefb9f60a32dd4da43b735d8e0063a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeOutTime: 1
 --- !u!114 &114786083401456856
 MonoBehaviour:
   m_ObjectHideFlags: 1

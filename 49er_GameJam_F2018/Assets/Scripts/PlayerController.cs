@@ -1,10 +1,10 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
 Author: Irvin Naylor
-Last Change: Michael - Adding Ducking
+Last Change: Michael - Added Flashing
 Script summary
     - Script starts by using Player's Rigidbody component to continuously move forward
     - If the jump key is held down, the player jumps.
@@ -26,20 +26,22 @@ Notes:
 
 public class PlayerController : MonoBehaviour {
 
-    //TEST VALUE
-    public bool inited = false;
+    public Color flash;
+    private Color mainColor = new Color(255,255,255);
 
     public float moveSpeed;
     public float jumpForce;
 
     public float maxSpeed;
+    public float minSpeed;
     public float accel;
     public float decelDam;
 
 
-    public float iTime;
+    public float iTime = 3;
 
     private bool invincible;
+    private bool Dyin;
 
     public Sprite Stand;
     public Sprite Duck;
@@ -58,7 +60,8 @@ public class PlayerController : MonoBehaviour {
     public float jumpTimeCounter;
     public bool stoppedJumping;
 
-
+    private int flashC;
+    public int flashAmount = 10;
 
     void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
@@ -69,14 +72,19 @@ public class PlayerController : MonoBehaviour {
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        spriteRenderer.color = mainColor;
+
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
 
-        inited = true;
 
         invincible = false;
 
         jumpTimeCounter = jumpTime;
+       
+
+        Dyin = false;
+        
 	}
 
     // Update is called once per frame
@@ -97,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 
         //is the character jumping?
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
 
             if (grounded) // is grounded true?
@@ -107,7 +115,7 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.W) && !stoppedJumping)
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.Space)) && !stoppedJumping)
         {
             if (jumpTimeCounter > 0)
             {
@@ -123,14 +131,15 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        if (Input.GetKeyDown(KeyCode.S) && grounded) 
+ 
+        if (Input.GetKeyDown(KeyCode.S) || (Input.GetKeyDown(KeyCode.DownArrow) && grounded))
         {
             spriteRenderer.sprite = Duck;
             boxCollider.size = new Vector2(1, (float).5);
             boxCollider.offset = new Vector2(0, (float)-.25);
 
         } 
-        else if (Input.GetKeyUp(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.S) || (Input.GetKeyUp(KeyCode.DownArrow)))
         {
             spriteRenderer.sprite = Stand;
             boxCollider.size = new Vector2(1, 1);
@@ -139,8 +148,47 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Accelerate velocity
-        if (moveSpeed < maxSpeed)
+        if (moveSpeed >= maxSpeed)
         {
+
+            moveSpeed = maxSpeed;
+ 
+        }
+        else if (moveSpeed <= minSpeed)
+        {
+            //so it doesn't bounce. but delete doesn't release.
+            if (moveSpeed < 0)
+                moveSpeed = minSpeed;
+
+            Debug.Log("Dying");
+
+
+            //auto destroys anything under 1.
+            if (moveSpeed < .5)
+            {
+                Dyin = false;
+                Invoke("Destruction", 2);
+            }
+            else
+            {
+                Dyin = true;
+            }
+
+            //if you are dyin, you are slowin down. No need to worry about above if, cuz it won't ever be greater.
+            if (Dyin)
+            {
+                moveSpeed = moveSpeed / 1.075f;
+                Debug.Log(moveSpeed);
+            }
+
+            
+        } else if (invincible) 
+        {
+            moveSpeed += 0;
+        }
+        else 
+        {
+
             if (Time.timeScale == 0)
             {
                 moveSpeed = moveSpeed;
@@ -150,16 +198,12 @@ public class PlayerController : MonoBehaviour {
                 moveSpeed += accel;
             }
         }
-        else
-        {
-            moveSpeed = maxSpeed;
-        }
-}
+
+    }
 
     //Damage called from other objects
     public void SlowDown()
     {
-        Debug.Log("I am " + invincible);
 
         if (!invincible)
         {
@@ -177,5 +221,39 @@ public class PlayerController : MonoBehaviour {
     void ResetInvulnerability()
     {
         invincible = false;
+
+    }
+
+    void Destruction()
+    {
+        Debug.Log("You are now Dead");
+        Dyin = false;
+        moveSpeed = 0;
+
+        GameObject Manager = GameObject.Find("GameManager");
+        GameManager managerial = Manager.GetComponent<GameManager>();
+        managerial.GameOver();
+
+
+    }
+
+    private void LateUpdate()
+    {
+        //makes object flash when invincible
+        if (invincible)
+        {
+            if (flashC < flashAmount) {
+                spriteRenderer.color = flash;
+
+            } else {
+                spriteRenderer.color = mainColor;
+            }
+
+            if (flashC > flashAmount * 2) flashC = 0;
+            flashC++;
+        } else {
+            spriteRenderer.color = mainColor;
+        }
+       
     }
 }
