@@ -77,9 +77,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.15625, y: 0.15625, z: 0.1875, w: 0.15625}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.6875, y: 1.3125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -99,21 +99,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a10f1473a129b4fbeab0e37b8cd59a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inited: 0
-  moveSpeed: 3
+  flash: {r: 0, g: 0, b: 0, a: 0}
+  moveSpeed: 5
   jumpForce: 10
-
-  maxSpeed: 5
+  maxSpeed: 15
+  minSpeed: 0
   accel: 0
   decelDam: 0
   iTime: 0
   Stand: {fileID: 21300000, guid: b621968e68e16894e935f71cb706198a, type: 3}
   Duck: {fileID: 21300000, guid: 60d32fea44d1340fe884a1e640455ff3, type: 3}
-
   grounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  flashAmount: 10
 --- !u!212 &212867699537042106
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -149,7 +149,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b621968e68e16894e935f71cb706198a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a286bbe04f574449938e77fc60bafba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
