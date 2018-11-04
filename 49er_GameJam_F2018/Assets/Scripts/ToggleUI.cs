@@ -14,24 +14,27 @@ public class ToggleUI : MonoBehaviour {
     private int pauseC = 1000;
 
     // Use this for initialization
-    void Start () {
 
-        //find by name
-        if (speed == null)
-            speed = GameObject.Find("Speedometer");
-        if (timer == null)
-            timer = GameObject.Find("Timer");
+    void Awake () {
+
+        ObjFinder();
 
         timer.SetActive(false);
         speed.SetActive(false);
 
         Time.timeScale = 1;
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void FixedUpdate()
+    {
+        ObjFinder();
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         
+
         //Pause Function
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -48,7 +51,7 @@ public class ToggleUI : MonoBehaviour {
 
         if (pauseC == pauseDelay) Time.timeScale = 1;
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKey(KeyCode.O))
         {
             timer.SetActive(true);
             timerC = 0;
@@ -56,7 +59,7 @@ public class ToggleUI : MonoBehaviour {
 
 
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKey(KeyCode.P))
         {
 
             speed.SetActive(true);
@@ -65,12 +68,12 @@ public class ToggleUI : MonoBehaviour {
         }
 
 
-        if (speedC > timeUp && !Input.GetKeyDown(KeyCode.P)) 
+        if (speedC > timeUp && !Input.GetKey(KeyCode.P)) 
         {
             speed.SetActive(false);
         }
 
-        if (timerC > timeUp && !Input.GetKeyDown(KeyCode.O)) 
+        if (timerC > timeUp && !Input.GetKey(KeyCode.O)) 
         {
             timer.SetActive(false);
 
@@ -83,5 +86,45 @@ public class ToggleUI : MonoBehaviour {
 
     void StartTime() {
         Time.timeScale = 1;
+    }
+
+    void ObjFinder()
+    {
+
+        //find by name
+        if (speed == null)
+            speed = GameObject.Find("Speedometer");
+        if (timer == null)
+            timer = GameObject.Find("Timer");
+    }
+
+    public GameObject getTextObject(string which)
+    {
+        GameObject finnaTurn;
+        if (timer != null && speed != null)
+        {
+            if (which.Equals("speed"))
+            {
+                speed.SetActive(true);
+                finnaTurn = speed;
+                speed.SetActive(false);
+            }
+            else if (which.Equals("time"))
+            {
+                timer.SetActive(true);
+                finnaTurn = timer;
+                timer.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Incorrect String while getting timer/speed");
+                finnaTurn = null;
+            }
+        }
+        else
+        {
+            finnaTurn = null;
+        }
+        return finnaTurn;
     }
 }

@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour {
     public Text timeText;
     private GameObject player;
     public PlayerController controller;
+    private ToggleUI toggy;
     public float xPos = 0;
     public float yPos = 55;
 
@@ -16,15 +17,11 @@ public class Timer : MonoBehaviour {
     private float posY;
 
     // USE AWAKE. The text elements will be null exceptions if you use start.
-    void Awake () {
+    void Start () {
         time = 0;
 
-        if (player == null)
-            player = GameObject.Find("Player");
-        if (controller == null)
-            controller = player.GetComponent<PlayerController>();
-        if (timeText == null)
-            timeText = GameObject.Find("Timer").GetComponent<Text>();
+        ObjFinder();
+       
         
         timeText.text = "";
 
@@ -36,17 +33,35 @@ public class Timer : MonoBehaviour {
         time += Time.deltaTime;
         if (timeText != null)
             timeText.text = Mathf.Round(time).ToString();
+        else
+            ObjFinder();
 
-       // timeText.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x, Camera.main.WorldToScreenPoint(controller.transform.position).y, Camera.main.WorldToScreenPoint(controller.transform.position).z);
+        // timeText.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x, Camera.main.WorldToScreenPoint(controller.transform.position).y, Camera.main.WorldToScreenPoint(controller.transform.position).z);
 
     }
 
     private void LateUpdate()
     {
         if (timeText != null)
-            timeText.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x + xPos, 
-                                                    Camera.main.WorldToScreenPoint(controller.transform.position).y + yPos, 
+            timeText.transform.position = new Vector3(Camera.main.WorldToScreenPoint(controller.transform.position).x + xPos,
+                                                    Camera.main.WorldToScreenPoint(controller.transform.position).y + yPos,
                                                     Camera.main.WorldToScreenPoint(controller.transform.position).z);
+        else
+            ObjFinder();
 
+    }
+
+    void ObjFinder()
+    {
+        if (player == null)
+            player = GameObject.Find("Player");
+        if (controller == null)
+            controller = player.GetComponent<PlayerController>();
+
+        if (timeText == null)
+        {
+            toggy = this.GetComponent<ToggleUI>();
+            timeText = toggy.getTextObject("time").GetComponent<Text>();
+        }
     }
 }
