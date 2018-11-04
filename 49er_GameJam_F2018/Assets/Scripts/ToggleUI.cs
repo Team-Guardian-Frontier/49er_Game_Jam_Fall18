@@ -8,7 +8,6 @@ public class ToggleUI : MonoBehaviour {
 
     public GameObject menu2;
     public bool isShowing2;
-
     // Use this for initialization
     void Start () {
         isShowing = true;
@@ -41,8 +40,6 @@ public class ToggleUI : MonoBehaviour {
 
             
         }
-
-        
 
         if (Input.GetKeyDown(KeyCode.P))
         {
