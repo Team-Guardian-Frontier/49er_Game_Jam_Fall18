@@ -26,19 +26,20 @@ Notes:
 
 public class PlayerController : MonoBehaviour {
 
-    //TEST VALUE
-    public bool inited = false;
+
 
     public float moveSpeed;
     public float jumpForce;
 
     public float maxSpeed;
+    public float minSpeed;
     public float accel;
     public float decelDam;
 
     public float iTime;
 
     private bool invincible;
+    private bool Dyin;
 
     private Rigidbody2D RigidBody_A;
     private Collider2D myCollider;
@@ -58,10 +59,10 @@ public class PlayerController : MonoBehaviour {
         //adjusts acceleration so it's a reasonable value to input.
         accel = accel/100;
 
-        inited = true;
 
         invincible = false;
-        
+
+        Dyin = false;
         
 	}
 
@@ -87,21 +88,50 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Accelerate velocity
-        if (moveSpeed < maxSpeed)
+        if (moveSpeed >= maxSpeed)
         {
-            moveSpeed += accel;
+            moveSpeed = maxSpeed;
+ 
+        }
+        else if (moveSpeed <= minSpeed)
+        {
+            //so it doesn't bounce. but delete doesn't release.
+            if (moveSpeed < 0)
+                moveSpeed = minSpeed;
+
+            Debug.Log("Dying");
+
+
+            //auto destroys anything under 1.
+            if (moveSpeed < .5)
+            {
+                Dyin = false;
+                Invoke("Destruction", 2);
+            }
+            else
+            {
+                Dyin = true;
+            }
+
+            //if you are dyin, you are slowin down. No need to worry about above if, cuz it won't ever be greater.
+            if (Dyin)
+            {
+                moveSpeed = moveSpeed / 1.075f;
+                Debug.Log(moveSpeed);
+            }
+
+            
         }
         else
         {
-            moveSpeed = maxSpeed;
 
+            moveSpeed += accel;
         }
-}
+    }
 
     //Damage called from other objects
     public void SlowDown()
     {
-        Debug.Log("I am " + invincible);
 
         if (!invincible)
         {
@@ -119,5 +149,19 @@ public class PlayerController : MonoBehaviour {
     void ResetInvulnerability()
     {
         invincible = false;
+
+    }
+
+    void Destruction()
+    {
+        Debug.Log("You are now Dead");
+        Dyin = false;
+        moveSpeed = 0;
+
+        GameObject Manager = GameObject.Find("GameManager");
+        GameManager managerial = Manager.GetComponent<GameManager>();
+        managerial.GameOver();
+
+
     }
 }

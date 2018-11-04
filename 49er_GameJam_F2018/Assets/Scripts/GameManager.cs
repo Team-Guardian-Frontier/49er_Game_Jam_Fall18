@@ -46,21 +46,15 @@ public class GameManager : MonoBehaviour {
         {
             Player = GameObject.FindGameObjectWithTag("Player");
             controller = Player.GetComponent<PlayerController>();
-            Debug.Log("I am bog" + controller.decelDam);
 
             //restart if player deleted.
             if (Player == null)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                GameOver();
             }
         }
         else //all player functions if the player isn't null.
         {
-            //restart if player slowed to halt
-            if (controller.moveSpeed <= 0)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
             
             
         }
@@ -68,8 +62,13 @@ public class GameManager : MonoBehaviour {
         //Quick restart for Debug, R
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            GameOver();
         }
 
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
