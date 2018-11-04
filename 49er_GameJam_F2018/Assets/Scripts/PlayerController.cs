@@ -53,10 +53,14 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
 
     private float totalDamage;
+    
+    public float jumpTime;
+    public float jumpTimeCounter;
+    public bool stoppedJumping;
 
 
 
-	void Start () {
+    void Start () {
         RigidBody_A = GetComponent<Rigidbody2D>();
 
         myCollider = GetComponent<Collider2D>();
@@ -71,8 +75,8 @@ public class PlayerController : MonoBehaviour {
         inited = true;
 
         invincible = false;
-        
-        
+
+        jumpTimeCounter = jumpTime;
 	}
 
     // Update is called once per frame
@@ -85,6 +89,12 @@ public class PlayerController : MonoBehaviour {
 
         RigidBody_A.velocity = new Vector2(moveSpeed, RigidBody_A.velocity.y);
 
+        //reset jump time on the ground
+        if (grounded) // is grounded true?
+        {
+            jumpTimeCounter = jumpTime;
+        }
+
         //is the character jumping?
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -93,8 +103,25 @@ public class PlayerController : MonoBehaviour {
             if (grounded) // is grounded true?
             {
                 RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
+                stoppedJumping = false;
             }
         }
+
+        if (Input.GetKey(KeyCode.W) && !stoppedJumping)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
+            jumpTimeCounter = 0;
+            stoppedJumping = true;
+        }
+
 
         if (Input.GetKeyDown(KeyCode.S) && grounded) 
         {
