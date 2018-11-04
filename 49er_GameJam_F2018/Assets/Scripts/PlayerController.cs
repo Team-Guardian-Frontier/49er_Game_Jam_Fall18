@@ -118,11 +118,18 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
-
-            if (grounded) // is grounded true?
+            if (Time.timeScale == 0)
             {
-                RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
-                stoppedJumping = false;
+
+            }
+
+            else
+            { 
+                if (grounded) // is grounded true?
+                {
+                    RigidBody_A.velocity = new Vector2(RigidBody_A.velocity.x, jumpForce);
+                    stoppedJumping = false;
+                }
             }
         }
 
@@ -145,16 +152,32 @@ public class PlayerController : MonoBehaviour {
  
         if (Input.GetKeyDown(KeyCode.S) || (Input.GetKeyDown(KeyCode.DownArrow) && grounded))
         {
-            spriteRenderer.sprite = Duck;
-            boxCollider.size = new Vector2(0.7036116f, 0.665009f);
-            boxCollider.offset = new Vector2(0,-.1f);
+            if (Time.timeScale == 0)
+            {
+
+            }
+
+            else
+            {
+                spriteRenderer.sprite = Duck;
+                boxCollider.size = new Vector2(0.7036116f, 0.665009f);
+                boxCollider.offset = new Vector2(0, -.1f);
+            }
 
         } 
         else
         {
-            spriteRenderer.sprite = Stand;
-            boxCollider.size = new Vector2(0.7036116f, 1.330018f);
-            boxCollider.offset = new Vector2(0, 0);
+            if (Time.timeScale == 0)
+            {
+
+            }
+
+            else
+            {
+                spriteRenderer.sprite = Stand;
+                boxCollider.size = new Vector2(0.7036116f, 1.330018f);
+                boxCollider.offset = new Vector2(0, 0);
+            }
 
         }
 

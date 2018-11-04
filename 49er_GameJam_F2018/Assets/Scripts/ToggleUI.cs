@@ -49,6 +49,8 @@ public class ToggleUI : MonoBehaviour {
             }
         }
 
+        //if (pauseC == pauseDelay) Time.timeScale = 1;
+
         if (Input.GetKey(KeyCode.O))
         {
             timer.SetActive(true);
@@ -64,6 +66,18 @@ public class ToggleUI : MonoBehaviour {
             speedC = 0;
 
         }
+
+
+        if (speedC > timeUp && !Input.GetKey(KeyCode.P)) 
+        {
+            speed.SetActive(false);
+        }
+
+        if (timerC > timeUp && !Input.GetKey(KeyCode.O)) 
+        {
+            timer.SetActive(false);
+
+        } 
 
         pauseC++;
         timerC++;

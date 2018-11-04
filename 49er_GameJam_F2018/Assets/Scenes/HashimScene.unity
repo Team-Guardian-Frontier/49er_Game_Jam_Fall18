@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: {fileID: 0}
   timer: {fileID: 0}
-  timeUp: 0
+  timeUp: 55
   pauseDelay: 85
 --- !u!1 &292026666
 GameObject:
