@@ -147,8 +147,11 @@ public class PlayerController : MonoBehaviour {
             }
 
             
+        } else if (invincible) 
+        {
+            moveSpeed += 0;
         }
-        else
+        else 
         {
 
             if (Time.timeScale == 0)
