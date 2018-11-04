@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 
         //is the character jumping?
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
         {
 
             if (grounded) // is grounded true?
@@ -96,14 +96,14 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && grounded) 
+        if (Input.GetKeyDown(KeyCode.S) || (Input.GetKeyDown(KeyCode.DownArrow) && grounded))
         {
             spriteRenderer.sprite = Duck;
             boxCollider.size = new Vector2(1, (float).5);
             boxCollider.offset = new Vector2(0, (float)-.25);
 
         } 
-        else if (Input.GetKeyUp(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.S) || (Input.GetKeyUp(KeyCode.DownArrow)))
         {
             spriteRenderer.sprite = Stand;
             boxCollider.size = new Vector2(1, 1);
