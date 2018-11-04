@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 224731112616262114}
   - component: {fileID: 222752151190748522}
   - component: {fileID: 114786083401456856}
+  - component: {fileID: 114763709749823534}
   m_Layer: 5
   m_Name: Speedometer
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114763709749823534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1633947149157128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beaefb9f60a32dd4da43b735d8e0063a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutTime: 1
 --- !u!114 &114786083401456856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9568628, g: 0.5058824, b: 0, a: 1}
+  m_Color: {r: 0.9568628, g: 0.5058824, b: 0, a: 0.47058824}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
